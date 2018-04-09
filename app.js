@@ -133,9 +133,22 @@ function draw() {
   });
 
   makeAndDraw(
-    'test',
+    'circles2',
     (canvas, ctx) => {
-      drawGrid(ctx, {width: 150, height: 200});
+      const radius = 20;
+      const startAngle = 0;
+      for (let a = 0; a < 4; a++) {
+        for (let b = 0; b < 3; b++) {
+          ctx.beginPath();
+          const x = 25 + b * 50;
+          const y = 25 + a * 50;
+          const endAngle = PI + PI * b / 2;
+          const anticlockwise = a % 2 !== 0;
+          ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+          a < 2 ? ctx.stroke() : ctx.fill();
+        }
+      }
     },
     {width: 150, height: 200},
   );
