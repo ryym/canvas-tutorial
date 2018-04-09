@@ -3,19 +3,21 @@ if (!canvasContainer) {
   throw new Error('canvas container not found');
 }
 
-function makeAndDraw(id, drawer) {
+function makeAndDraw(id, drawer, {width = 150, height = 150} = {}) {
   const canvas = document.createElement('canvas');
   canvas.id = id;
-  canvas.width = canvas.height = 150;
+  canvas.width = width;
+  canvas.height = height;
   canvasContainer.appendChild(canvas);
   drawer(canvas, canvas.getContext('2d'));
 }
 
-function drawGrid(ctx, unit = 10) {
+function drawGrid(ctx, {unit = 10, width = 150, height = 150} = {}) {
   const {strokeStyle} = ctx;
 
   const markedUnit = unit * 5;
-  for (let i = unit; i < 150; i += unit) {
+  const maxSize = Math.max(width, height);
+  for (let i = unit; i < maxSize; i += unit) {
     ctx.beginPath();
     ctx.strokeStyle =
       i % markedUnit === 0
@@ -23,16 +25,16 @@ function drawGrid(ctx, unit = 10) {
         : 'rgba(100, 100, 100, 0.5)';
 
     ctx.moveTo(0, i);
-    ctx.lineTo(150, i);
+    ctx.lineTo(maxSize, i);
     ctx.moveTo(i, 0);
-    ctx.lineTo(i, 150);
+    ctx.lineTo(i, maxSize);
     ctx.stroke();
   }
 
   // Mark center
   ctx.beginPath();
   ctx.strokeStyle = 'rgba(200, 0, 0, 0.5)';
-  ctx.arc(75, 75, 1, 0, Math.PI * 2);
+  ctx.arc(width / 2, height / 2, 1, 0, Math.PI * 2);
   ctx.stroke();
 
   ctx.strokeStyle = strokeStyle;
@@ -129,6 +131,14 @@ function draw() {
     ctx.closePath();
     ctx.stroke();
   });
+
+  makeAndDraw(
+    'test',
+    (canvas, ctx) => {
+      drawGrid(ctx, {width: 150, height: 200});
+    },
+    {width: 150, height: 200},
+  );
 }
 
 draw();
