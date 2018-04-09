@@ -112,6 +112,23 @@ function draw() {
 
     ctx.stroke();
   });
+
+  makeAndDraw('two-triangles', (canvas, ctx) => {
+    drawGrid(ctx);
+
+    ctx.beginPath();
+    ctx.moveTo(20, 20);
+    ctx.lineTo(100, 20);
+    ctx.lineTo(20, 100);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(110, 110);
+    ctx.lineTo(110, 30);
+    ctx.lineTo(30, 110);
+    ctx.closePath();
+    ctx.stroke();
+  });
 }
 
 draw();
