@@ -11,6 +11,33 @@ function makeAndDraw(id, drawer) {
   drawer(canvas, canvas.getContext('2d'));
 }
 
+function drawGrid(ctx, unit = 10) {
+  const {strokeStyle} = ctx;
+
+  const markedUnit = unit * 5;
+  for (let i = unit; i < 150; i += unit) {
+    ctx.beginPath();
+    ctx.strokeStyle =
+      i % markedUnit === 0
+        ? 'rgba(200, 0, 0, 0.5)'
+        : 'rgba(100, 100, 100, 0.5)';
+
+    ctx.moveTo(0, i);
+    ctx.lineTo(150, i);
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i, 150);
+    ctx.stroke();
+  }
+
+  // Mark center
+  ctx.beginPath();
+  ctx.strokeStyle = 'rgba(200, 0, 0, 0.5)';
+  ctx.arc(75, 75, 1, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.strokeStyle = strokeStyle;
+}
+
 function draw() {
   if (!document.createElement('canvas').getContext) {
     console.log('Canvas not supported');
