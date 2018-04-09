@@ -93,6 +93,25 @@ function draw() {
     ctx.arc(75, 75, 40, 0, PI * 1.5, true); // 右上のみ
     ctx.stroke();
   });
+
+  makeAndDraw('smily', (canvas, ctx) => {
+    drawGrid(ctx);
+
+    ctx.beginPath();
+
+    ctx.arc(75, 75, 50, 0, PI * 2); // Outer circle
+
+    ctx.moveTo(75 + 35, 75);
+    ctx.arc(75, 75, 35, 0, PI); // Mouth
+
+    ctx.moveTo(65, 65);
+    ctx.arc(60, 65, 5, 0, PI * 2); // Left eye (75 - 15)
+
+    ctx.moveTo(95, 65);
+    ctx.arc(90, 65, 5, 0, PI * 2); // Right eye (75 + 15)
+
+    ctx.stroke();
+  });
 }
 
 draw();
