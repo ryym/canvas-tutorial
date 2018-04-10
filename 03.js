@@ -34,6 +34,29 @@ function draw() {
       }
     }
   });
+
+  makeAndDraw('semi-transparent-circles', ctx => {
+    [
+      ['#fd0', 0, 0],
+      ['#6c0', 75, 0],
+      ['#09f', 0, 75],
+      ['#f30', 75, 75],
+    ].forEach(([color, x, y]) => {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, 75, 75);
+    });
+
+    ctx.fillStyle = '#fff';
+    ctx.globalAlpha = 0.2;
+
+    // 中心を共有する円を徐々に大きくして描画する。
+    // 中心部分ほど繰り返し描画されるので、透明度が下がる。
+    for (let i = 0; i < 7; i++) {
+      ctx.beginPath();
+      ctx.arc(75, 75, 10 + 10 * i, 0, PI * 2);
+      ctx.fill();
+    }
+  });
 }
 
 draw();
