@@ -8,7 +8,7 @@ const makeCanvasMaker = (container, {defaultWidth, defaultHeight}) => (
   canvas.width = width;
   canvas.height = height;
   container.appendChild(canvas);
-  draw(canvas, canvas.getContext('2d'));
+  draw(canvas.getContext('2d'), canvas);
 };
 
 const makeGridDrawer = ({defaultWidth, defaultHeight}) => (

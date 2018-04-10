@@ -9,20 +9,20 @@ function draw() {
 
   assertCanvasIsSupported();
 
-  makeAndDraw('intersecting-rectangles', (canvas, ctx) => {
+  makeAndDraw('intersecting-rectangles', (ctx, canvas) => {
     ctx.fillStyle = 'rgb(200, 0, 0)';
     ctx.fillRect(10, 10, 50, 50);
     ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
     ctx.fillRect(30, 30, 50, 50);
   });
 
-  makeAndDraw('rectangle-fill-clear-stroke', (canvas, ctx) => {
+  makeAndDraw('rectangle-fill-clear-stroke', (ctx, canvas) => {
     ctx.fillRect(25, 25, 100, 100);
     ctx.clearRect(45, 45, 60, 60);
     ctx.strokeRect(50, 50, 50, 50);
   });
 
-  makeAndDraw('draw-triangles-using-paths', (canvas, ctx) => {
+  makeAndDraw('draw-triangles-using-paths', (ctx, canvas) => {
     ctx.beginPath();
     ctx.moveTo(75, 50);
     ctx.lineTo(100, 75);
@@ -41,7 +41,7 @@ function draw() {
   // 円の描画は右端の点からスタートするっぽい。
   // 最後の boolean で時計回りかどうかを指定できる。
   // trueなら反時計周り (anticlockwise)。
-  makeAndDraw('circles', (canvas, ctx) => {
+  makeAndDraw('circles', (ctx, canvas) => {
     ctx.beginPath();
     ctx.arc(75, 75, 70, 0, PI * 2); // A circle
     ctx.stroke();
@@ -59,7 +59,7 @@ function draw() {
     ctx.stroke();
   });
 
-  makeAndDraw('smily', (canvas, ctx) => {
+  makeAndDraw('smily', (ctx, canvas) => {
     drawGrid(ctx);
 
     ctx.beginPath();
@@ -78,7 +78,7 @@ function draw() {
     ctx.stroke();
   });
 
-  makeAndDraw('two-triangles', (canvas, ctx) => {
+  makeAndDraw('two-triangles', (ctx, canvas) => {
     drawGrid(ctx);
 
     ctx.beginPath();
@@ -97,7 +97,7 @@ function draw() {
 
   makeAndDraw(
     'circles2',
-    (canvas, ctx) => {
+    (ctx, canvas) => {
       const radius = 20;
       const startAngle = 0;
       for (let a = 0; a < 4; a++) {
@@ -118,7 +118,7 @@ function draw() {
 
   // 今は全然わからない。たぶん普通はイラストソフトでもっとインタラクティブに
   // 作成するものでは。
-  makeAndDraw('quadratic-curve-balloon', (canvas, ctx) => {
+  makeAndDraw('quadratic-curve-balloon', (ctx, canvas) => {
     drawGrid(ctx);
     ctx.beginPath();
     ctx.moveTo(75, 25);
@@ -130,7 +130,7 @@ function draw() {
     ctx.quadraticCurveTo(125, 25, 75, 25);
     ctx.stroke();
   });
-  makeAndDraw('cubic-curve-heart', (canvas, ctx) => {
+  makeAndDraw('cubic-curve-heart', (ctx, canvas) => {
     drawGrid(ctx);
     ctx.beginPath();
     ctx.moveTo(75, 40);
@@ -143,7 +143,7 @@ function draw() {
     ctx.fill();
   });
 
-  makeAndDraw('packman', (canvas, ctx) => {
+  makeAndDraw('packman', (ctx, canvas) => {
     // drawGrid(ctx);
 
     // arcTo([本来なら角になる座標], [移動先], radius)
@@ -249,7 +249,7 @@ function draw() {
   });
 
   // Path2D というちょっと新し目のAPIを使うとコードの再利用がしやすい
-  makeAndDraw('path2d', (canvas, ctx) => {
+  makeAndDraw('path2d', (ctx, canvas) => {
     const rect = new Path2D();
     rect.rect(10, 10, 50, 50);
 
