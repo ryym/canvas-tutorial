@@ -284,6 +284,22 @@ function draw() {
     ctx.arc(89, 102, 2, 0, Math.PI * 2, true);
     ctx.fill();
   });
+
+  // Path2D というちょっと新し目のAPIを使うとコードの再利用がしやすい
+  makeAndDraw('path2d', (canvas, ctx) => {
+    const rect = new Path2D();
+    rect.rect(10, 10, 50, 50);
+
+    const circle = new Path2D();
+    circle.arc(100, 35, 25, 0, PI * 2);
+
+    ctx.stroke(rect);
+    ctx.fill(circle);
+
+    // SVGパスも使える。
+    const svgPath = new Path2D('M80 80 h 40 v 40 h -40 Z');
+    ctx.stroke(svgPath);
+  });
 }
 
 draw();
