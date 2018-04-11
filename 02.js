@@ -116,8 +116,8 @@ function draw() {
     {width: 150, height: 200},
   );
 
-  // 今は全然わからない。たぶん普通はイラストソフトでもっとインタラクティブに
-  // 作成するものでは。
+  // https://postd.cc/bezier-curves/
+  // イラストソフトとかで直感的に覚えたいところ。
   makeAndDraw('quadratic-curve-balloon', (ctx, canvas) => {
     drawGrid(ctx);
     ctx.beginPath();
