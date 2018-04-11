@@ -57,6 +57,35 @@ function draw() {
       ctx.fill();
     }
   });
+
+  makeAndDraw('rgba-gradient', ctx => {
+    const colors = [
+      'rgb(255, 221, 0)',
+      'rgb(102, 204, 0)',
+      'rgb(0, 153, 255)',
+      'rgb(255, 51, 0)',
+    ];
+    const layerHeight = 150 / colors.length;
+
+    // Background
+    colors.forEach((color, i) => {
+      ctx.fillStyle = color;
+      ctx.fillRect(0, i * layerHeight, 150, layerHeight);
+    });
+
+    const width = (150 - 10) / 10;
+    for (let i = 0; i < 10; i++) {
+      ctx.fillStyle = `rgba(255, 255, 255, ${(i + 1) / 10})`;
+      for (let j = 0; j < 4; j++) {
+        ctx.fillRect(
+          i * width + 5,
+          j * layerHeight + 5,
+          width,
+          layerHeight - 10,
+        );
+      }
+    }
+  });
 }
 
 draw();
