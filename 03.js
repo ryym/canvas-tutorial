@@ -86,6 +86,44 @@ function draw() {
       }
     }
   });
+
+  makeAndDraw('line-width', ctx => {
+    for (let i = 0; i < 10; i++) {
+      ctx.lineWidth = 1 + i;
+      ctx.beginPath();
+      ctx.moveTo(5 + i * 14, 5);
+      ctx.lineTo(5 + i * 14, 140);
+      ctx.stroke();
+    }
+  });
+
+  // 同じ 1px width でも見た目が違う。
+  // 前者がぼやけて見えるのは、実際には 2px の幅があるため。
+  // 1px 幅の線をピクセルグリッドに沿って引く場合、
+  // グリッド線の左右を 0.5px だけ塗る必要があるが、
+  // それはできないから線に含まれない外側の 0.5px は
+  // 薄い色を塗る事で擬似的に 1px の線としている。
+  // そのためグリッドに沿わず x が _.5 となる位置で
+  // 1px の線を引くとちょうど 1px の線が引ける。
+  makeAndDraw('line-width2', ctx => {
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(5, 5);
+    ctx.lineTo(5, 140);
+    ctx.moveTo(10.5, 5);
+    ctx.lineTo(10.5, 140);
+    ctx.stroke();
+
+    // 2px の線ならグリッドに沿えば両側のピクセルがきれいに塗られる。
+    // _.5 を中心に引くと逆にぼやける。
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(20, 5);
+    ctx.lineTo(20, 140);
+    ctx.moveTo(25.5, 5);
+    ctx.lineTo(25.5, 140);
+    ctx.stroke();
+  });
 }
 
 draw();
