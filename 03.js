@@ -124,6 +124,42 @@ function draw() {
     ctx.lineTo(25.5, 140);
     ctx.stroke();
   });
+
+  makeAndDraw('line-caps', ctx => {
+    // guides
+    ctx.strokeStyle = '#09f';
+    ctx.beginPath();
+    ctx.moveTo(10, 10);
+    ctx.lineTo(140, 10);
+    ctx.moveTo(10, 140);
+    ctx.lineTo(140, 140);
+    ctx.stroke();
+
+    ctx.strokeStyle = '#000';
+
+    ['butt', 'round', 'square'].forEach((lineCap, i) => {
+      ctx.lineWidth = 15;
+      ctx.lineCap = lineCap;
+      ctx.beginPath();
+      ctx.moveTo(25 + i * 50, 10);
+      ctx.lineTo(25 + i * 50, 140);
+      ctx.stroke();
+    });
+  });
+
+  makeAndDraw('line-joins', ctx => {
+    ctx.lineWidth = 10;
+    ['round', 'bevel', 'miter'].forEach((lineJoin, i) => {
+      ctx.lineJoin = lineJoin;
+      ctx.beginPath();
+      ctx.moveTo(-5, 10 + i * 40);
+      ctx.lineTo(35, 50 + i * 40);
+      ctx.lineTo(75, 10 + i * 40);
+      ctx.lineTo(115, 50 + i * 40);
+      ctx.lineTo(155, 10 + i * 40);
+      ctx.stroke();
+    });
+  });
 }
 
 draw();
