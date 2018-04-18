@@ -160,6 +160,71 @@ function draw() {
       ctx.stroke();
     });
   });
+
+  makeAndDraw('linear-gradient', ctx => {
+    // グラデーションの位置とサイズ、方向を指定する。これなら (0,0)->(0,150)。
+    // 例えば(0,0)->(150,150) にすると右下方向のグラデーションになる。
+    const lingrad = ctx.createLinearGradient(0, 0, 0, 150);
+
+    lingrad.addColorStop(0, '#00abeb');
+    lingrad.addColorStop(0.5, '#fff');
+    lingrad.addColorStop(0.5, '#26c000');
+    lingrad.addColorStop(1, '#fff');
+
+    // CSS でいうと background-image にセットするような感じか。
+    ctx.fillStyle = lingrad;
+    ctx.fillRect(10, 10, 130, 130);
+
+    const lingrad2 = ctx.createLinearGradient(0, 50, 0, 90);
+    lingrad2.addColorStop(0.5, '#000');
+    lingrad2.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+    ctx.strokeStyle = lingrad2;
+    ctx.strokeRect(50, 50, 50, 50);
+  });
+
+  makeAndDraw('radial-gradient', ctx => {
+    let radgrad = ctx.createRadialGradient(75, 75, 10, 75, 75, 75);
+    radgrad.addColorStop(0, '#f00');
+    radgrad.addColorStop(1, '#fff');
+
+    ctx.fillStyle = radgrad;
+    ctx.fillRect(0, 0, 150, 150);
+  });
+
+  makeAndDraw('radial-gradient2', ctx => {
+    const rad = (radgrad, colorStops) => {
+      colorStops.forEach(args => {
+        radgrad.addColorStop(...args);
+      });
+      ctx.fillStyle = radgrad;
+      ctx.fillRect(0, 0, 150, 150);
+    };
+
+    rad(ctx.createRadialGradient(0, 150, 50, 0, 140, 90), [
+      [0, '#f4f201'],
+      [0.8, '#e4c700'],
+      [1, 'rgba(228, 199, 0, 0)'],
+    ]);
+
+    rad(ctx.createRadialGradient(95, 15, 15, 102, 20, 40), [
+      [0, '#00c9ff'],
+      [0.8, '#00b5e2'],
+      [1, 'rgba(0, 201, 255, 0)'],
+    ]);
+
+    rad(ctx.createRadialGradient(105, 105, 20, 112, 120, 50), [
+      [0, '#ff5f98'],
+      [0.8, '#ff0188'],
+      [1, 'rgba(255, 1, 136, 0)'],
+    ]);
+
+    rad(ctx.createRadialGradient(45, 45, 10, 52, 50, 30), [
+      [0, '#a7d30c'],
+      [0.9, 'rgb(1, 159, 98)'],
+      [1, 'rgba(1, 159, 98, 0)'],
+    ]);
+  });
 }
 
 draw();
