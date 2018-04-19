@@ -225,6 +225,37 @@ function draw() {
       [1, 'rgba(1, 159, 98, 0)'],
     ]);
   });
+
+  makeAndDraw('create-pattern', ctx => {
+    const img = new Image();
+    img.src = 'https://mdn.mozillademos.org/files/222/Canvas_createpattern.png';
+    img.onload = () => {
+      ctx.fillStyle = ctx.createPattern(img, 'repeat');
+      ctx.fillRect(0, 0, 150, 150);
+    };
+  });
+
+  makeAndDraw('shadows', ctx => {
+    ctx.shadowOffsetX = 4;
+    ctx.shadowOffsetY = 4;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+
+    ctx.font = '20px Times New Roman';
+    ctx.fillStyle = 'Black';
+    ctx.fillText('Sample String', 5, 30);
+
+    ctx.shadowBlur = 8;
+    ctx.fillText('Sample with Blur', 5, 60);
+  });
+
+  makeAndDraw('fill-rules', ctx => {
+    ctx.beginPath();
+    ctx.arc(50, 40, 30, 0, Math.PI * 2, true);
+    ctx.arc(50, 40, 15, 0, Math.PI * 2, true);
+    ctx.arc(50, 40, 10, 0, Math.PI * 2, true);
+    ctx.arc(50, 40, 5, 0, Math.PI * 2, true);
+    ctx.fill('evenodd');
+  });
 }
 
 draw();
